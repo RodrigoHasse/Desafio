@@ -3,7 +3,8 @@ using Aplicacao.Services;
 using Core.Interfaces;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Core.Notification;
+using Core.Validation;
+using infra.Repositories;
 
 namespace Cross.IOC
 {
@@ -16,6 +17,9 @@ namespace Cross.IOC
 
             //Applications Services
             services.AddScoped<IApplicationServiceCalculo, AplicationServiceCalculo>();
+
+            //Repository
+            services.AddScoped<IRepositoryTaxaJuros, RepositoryTaxaJuros>();
 
             services.AddScoped<INotificacao, Notificacao>();
         }

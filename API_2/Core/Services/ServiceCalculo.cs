@@ -1,6 +1,9 @@
 ﻿using Core.Interfaces;
 using Core.Models.Calculo;
-using Core.Notification;
+using Core.Validation;
+using infra.Repositories;
+using System;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -8,12 +11,14 @@ namespace Core.Services
     {
         protected INotificacao Notificacao { get { return _notificacao; } }
         protected INotificacao _notificacao;
+        protected IRepositoryTaxaJuros _repositoryTaxaJuros;
 
-        public ServiceCalculo(INotificacao notificacao)
+        public ServiceCalculo(INotificacao notificacao, IRepositoryTaxaJuros repositoryTaxaJuros)
         {
             _notificacao = notificacao;
+            _repositoryTaxaJuros = repositoryTaxaJuros;
         }
-        public void ValidarAsync(Calculo calculo)
+        public async Task ValidarAsync(Calculo calculo)
         {
             var validacao = new CalculoValidation(calculo);
 
@@ -21,10 +26,22 @@ namespace Core.Services
                 _notificacao.Adicionar(notificacao.Message);
         }
 
-        public decimal GetCalculo(decimal valorInicial, int tempo)
-        {            
-            var calculo = Calculo.Criar(0.01M, valorInicial, tempo);
-            this.ValidarAsync(calculo);
+        public async Task<decimal> GetCalculo(decimal valorInicial, int tempo)
+        {
+            decimal taxaJuro = 0;
+            try
+            {
+                taxaJuro = await _repositoryTaxaJuros.RetornarTaxaJurosAsync();
+            }
+            catch (Exception ex) 
+            {
+                _notificacao.Adicionar("Erro ao buscar taxa de juros.");
+                return 0;
+            }       
+
+            var calculo = Calculo.Criar(taxaJuro, valorInicial, tempo);
+
+            await ValidarAsync(calculo);
 
             if (_notificacao.IsValid())
             {

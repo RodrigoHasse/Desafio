@@ -27,8 +27,8 @@ namespace Test.Integracao
 
             var resultado = _controller.taxaJuro();
 
-            var objResultado = Assert.IsType<OkObjectResult>(resultado);
-            Assert.Equal(200, objResultado.StatusCode);
+            var response = Assert.IsType<OkObjectResult>(resultado);
+            Assert.Equal(200, response.StatusCode);
 
             //var value = Assert.IsType<decimal>(objResultado.Value);
             //Assert.Equal(valorEsperado.Taxa, objResultado.Value);

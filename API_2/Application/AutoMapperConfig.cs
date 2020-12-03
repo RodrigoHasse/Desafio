@@ -1,8 +1,6 @@
 ﻿using Aplicacao.Mappers;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Aplicacao
 {

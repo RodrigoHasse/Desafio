@@ -1,5 +1,7 @@
 ﻿using Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace API.Controllers
 {
@@ -13,15 +15,19 @@ namespace API.Controllers
         }
 
         [HttpGet("taxaJuros")]
-        //[ProducesResponseType(typeof(Calculo), 200)]
+        [ProducesResponseType(typeof(decimal), 200)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult taxaJuro()
         {
-            var calculo = _servicoAplicacao.GetJuro();
-            if (calculo == null)
+            try
             {
-                return BadRequest("Juro não encontrado");
+                return Ok(_servicoAplicacao.GetJuro().Taxa);
             }
-            return Ok(calculo);
+            catch (Exception ex)
+            {
+                return BadRequest(error: ex.Message);
+            }
         }
     }
 }

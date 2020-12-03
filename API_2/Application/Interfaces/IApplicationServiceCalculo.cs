@@ -1,10 +1,11 @@
-﻿using Core.Notification;
+﻿using Core.Validation;
+using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
     public interface IApplicationServiceCalculo
     {
-        decimal GetCalculo(decimal valorInicial, int tempo);
+        Task<decimal> GetCalculo(decimal valorInicial, int tempo);
         INotificacao RetornarNotificacao();
     }
 }
