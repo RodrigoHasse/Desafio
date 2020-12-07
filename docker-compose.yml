@@ -1,0 +1,26 @@
+version: '3'
+services: 
+  api_1:
+    build: 
+      dockerfile: ./API_1/dockerfile
+      context: .
+    image: rodrigohasse/api_1
+    container_name: api_1
+    ports:
+      - "3000:80"   
+    networks:
+      - production-network           
+      
+  api_2:
+    build: 
+      dockerfile: ./API_2/dockerfile
+      context: .
+    image: rodrigohasse/api_2
+    container_name: api_2
+    ports:
+      - "3001:80"   
+    networks:
+      - production-network     
+networks:
+  production-network: 
+    driver: bridge

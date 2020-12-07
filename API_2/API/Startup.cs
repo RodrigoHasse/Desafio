@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Aplicacao;
-using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Refit;
+using Core.Interfaces;
 
 namespace API
 {
@@ -24,7 +24,6 @@ namespace API
             services.AddControllers();
             services.AddCors();
             Cross.IOC.IOCManager.Register(services);
-            services.AddAutoMapper(typeof(AutoMapperConfig));
 
             services.AddSwaggerGen(_ =>
             {
@@ -46,6 +45,9 @@ namespace API
                 //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 //_.IncludeXmlComments(xmlPath);
             });
+            var configureSection = Configuration.GetSection("CaminhoAPI_1:TaxaJuros");
+            services.AddRefitClient<IServiceTaxaJuro>().
+                ConfigureHttpClient(x => x.BaseAddress = new System.Uri(configureSection.Value));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +58,7 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

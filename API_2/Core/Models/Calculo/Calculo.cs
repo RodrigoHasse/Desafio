@@ -1,6 +1,7 @@
 ﻿using Core.Helpers;
 using DecimalMath;
 using FluentValidator.Validation;
+using System.Threading.Tasks;
 
 namespace Core.Models.Calculo
 {
@@ -13,10 +14,10 @@ namespace Core.Models.Calculo
         {
             
         }
-        public decimal Calcular()
+        public async Task<decimal> Calcular()
         {
-            var result = (DecimalEx.Pow(1 + TaxaJuros, Tempo));
-            return DecimalHelpers.Truncate(ValorInicial * result, 2);
+            var Potenciacao = (DecimalEx.Pow(1 + TaxaJuros, Tempo));
+            return DecimalHelpers.Truncate(ValorInicial * Potenciacao, 2);
         }        
     }
 

@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /src
+COPY ["API_1/API/API.csproj", "API_1/API/"]
+COPY ["API_1/Core/Core.csproj", "API_1/Core/"]
+COPY ["API_1/Application/Application.csproj", "API_1/Application/"]
+COPY ["API_1/CamadaCross/Cross.csproj", "API_1/CamadaCross/"]
+
+RUN dotnet restore "API_1/API/API.csproj"
+COPY . .
+WORKDIR "/src/API_1/API"
+RUN dotnet build "API.csproj" -c Release -o /app/build
+FROM build AS publish
+RUN dotnet publish "API.csproj" -c Release -o /app/publish
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "API.dll"]

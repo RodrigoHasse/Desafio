@@ -6,7 +6,7 @@ namespace Core.Interfaces
 {
     public interface IServiceCalculo
     {
-        Task<decimal> GetCalculo(decimal valorInicial, int tempo);
+        Task<decimal> GetCalculoAsync(decimal valorInicial, int tempo);
         Task ValidarAsync(Calculo calculo);
         INotificacao RetornarNotificacao();
     }

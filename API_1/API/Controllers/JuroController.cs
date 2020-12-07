@@ -15,7 +15,6 @@ namespace API.Controllers
         }
 
         [HttpGet("taxaJuros")]
-        [ProducesResponseType(typeof(decimal), 200)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult taxaJuro()

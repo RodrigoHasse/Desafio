@@ -8,7 +8,7 @@ namespace Test.Unit
     {
         [Theory]
         [InlineData(0.01)]
-        public void GetJuro(decimal taxa)
+        public void GetJuro_SemParametros_DeveRetornar1_01(decimal taxa)
         {
             ServicoJuro servJuro = new ServicoJuro();
 

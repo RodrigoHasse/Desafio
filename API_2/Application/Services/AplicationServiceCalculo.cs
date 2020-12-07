@@ -13,9 +13,9 @@ namespace Aplicacao.Services
         {
             _servico = servico;
         }
-        public async Task<decimal> GetCalculo(decimal valorInicial, int tempo)
+        public async Task<decimal> GetCalculoAsync(decimal valorInicial, int tempo)
         {   
-            return await _servico.GetCalculo(valorInicial, tempo);
+            return await _servico.GetCalculoAsync(valorInicial, tempo);
         }
 
         public INotificacao RetornarNotificacao()

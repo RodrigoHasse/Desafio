@@ -10,10 +10,8 @@
     <PackageReference Include="FluentValidator" Version="2.0.4" />
     <PackageReference Include="FluentValidator.Core" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\infra\infra.csproj" />
+    <PackageReference Include="Refit" Version="5.2.4" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="5.2.4" />
   </ItemGroup>
 
 </Project>

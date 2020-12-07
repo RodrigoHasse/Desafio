@@ -8,19 +8,19 @@ using Xunit;
 
 namespace Test.Integracao
 {
-    public class UnitTest1
+    public class TaxaJuroIntegracaoTest
     {
         Mock<IApplicationServiceJuro> _applicationServiceJuroMock;
         JuroController _controller;
 
-        public UnitTest1()
+        public TaxaJuroIntegracaoTest()
         {
             _applicationServiceJuroMock = new Mock<IApplicationServiceJuro>();
             _controller = new JuroController(_applicationServiceJuroMock.Object);
         }
 
         [Fact]
-        public void Get_DeveChamarService_Retornar200_ComValor0VirgulaZeroUm()
+        public void GetTaxaJuro_SemParametros_DeveRetornar200()
         {
             var valorEsperado = new JuroOutputModel { Taxa = 0.01M } ;
             _applicationServiceJuroMock.Setup(x => x.GetJuro()).Returns(valorEsperado);
@@ -29,9 +29,6 @@ namespace Test.Integracao
 
             var response = Assert.IsType<OkObjectResult>(resultado);
             Assert.Equal(200, response.StatusCode);
-
-            //var value = Assert.IsType<decimal>(objResultado.Value);
-            //Assert.Equal(valorEsperado.Taxa, objResultado.Value);
         }
     }
 }

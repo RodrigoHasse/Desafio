@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-
 using Microsoft.Extensions.Hosting;
 using Aplicacao;
 using AutoMapper;
@@ -41,10 +40,6 @@ namespace API
                             Email = "rodrigohasse1@gmail.com"
                         }
                     });
-
-                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                //_.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -56,13 +51,9 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
             app.UseAuthentication();
-
             app.UseSwagger();
             app.UseSwaggerUI(_ => { _.SwaggerEndpoint("/swagger/v1/swagger.json", "Desafio Softplan"); });
 

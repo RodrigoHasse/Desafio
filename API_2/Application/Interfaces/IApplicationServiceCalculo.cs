@@ -5,7 +5,7 @@ namespace Application.Interfaces
 {
     public interface IApplicationServiceCalculo
     {
-        Task<decimal> GetCalculo(decimal valorInicial, int tempo);
+        Task<decimal> GetCalculoAsync(decimal valorInicial, int tempo);
         INotificacao RetornarNotificacao();
     }
 }

@@ -16,12 +16,11 @@ namespace API.Controllers
         }
 
         [HttpGet("calculajuros")]
-        [ProducesResponseType(typeof(decimal), 200)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> calculajurosAsync([FromQuery][BindRequired] decimal valorInicial, [FromQuery][BindRequired] int tempo)
         {
-            var calculo = await _servicoAplicacao.GetCalculo(valorInicial, tempo);
+            var calculo = await _servicoAplicacao.GetCalculoAsync(valorInicial, tempo);
 
             if (!_servicoAplicacao.RetornarNotificacao().IsValid())
                 return BadRequest(error: _servicoAplicacao.RetornarNotificacao().RetornarErros());
@@ -30,7 +29,6 @@ namespace API.Controllers
         }
 
         [HttpGet("showmethecode")]
-        [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> showmethecode()
