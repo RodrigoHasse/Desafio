@@ -1,5 +1,5 @@
 # Desafio
-Desafio Técnico Softplan
+Desafio Técnico
 
 # A demanda
     Você deverá criar duas API's uma com dois endpoints e outra com um endpoint:
